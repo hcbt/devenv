@@ -13,3 +13,13 @@ RUN nix-env -if https://github.com/cachix/devenv/tarball/$DEVENV_VERSION
 
 # Remove devenv cache and cachix for cleaner image
 RUN cachix remove devenv && nix-env -e cachix
+
+# Create non-root user
+RUN echo "devenv:x:1000:1000:devenv:/home/devenv:/bin/sh" >> /etc/passwd && \
+    echo "devenv:x:1000:" >> /etc/group && \
+    mkdir -p /home/devenv && \
+    chown 1000:1000 /home/devenv
+
+# Switch to non-root user
+USER devenv
+WORKDIR /home/devenv
