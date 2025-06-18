@@ -18,7 +18,11 @@ RUN cachix remove devenv && nix-env -e cachix
 RUN echo "devenv:x:1000:1000:devenv:/home/devenv:/bin/sh" >> /etc/passwd && \
     echo "devenv:x:1000:" >> /etc/group && \
     mkdir -p /home/devenv && \
-    chown 1000:1000 /home/devenv
+    chown 1000:1000 /home/devenv && \
+    mkdir -p /nix/var/nix/profiles/per-user/devenv && \
+    chown -R 1000:1000 /nix/var/nix/profiles/per-user/devenv && \
+    mkdir -p /nix/var/nix/gcroots/per-user/devenv && \
+    chown -R 1000:1000 /nix/var/nix/gcroots/per-user/devenv
 
 # Switch to non-root user
 USER devenv
