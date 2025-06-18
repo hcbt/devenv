@@ -4,6 +4,9 @@ name: Publish containers
 on:
   workflow_call:
   workflow_dispatch:
+  push:
+    branches:
+      - run-container-as-regular-user
 
 env:
   REGISTRY: ghcr.io
