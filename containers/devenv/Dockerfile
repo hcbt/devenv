@@ -20,9 +20,10 @@ RUN echo "devenv:x:1000:1000:devenv:/home/devenv:/bin/sh" >> /etc/passwd && \
     mkdir -p /home/devenv && \
     chown 1000:1000 /home/devenv && \
     mkdir -p /nix/var/nix/profiles/per-user/devenv && \
-    chown -R 1000:1000 /nix/var/nix/profiles/per-user/devenv && \
     mkdir -p /nix/var/nix/gcroots/per-user/devenv && \
-    chown -R 1000:1000 /nix/var/nix/gcroots/per-user/devenv
+    chown -R 1000:1000 /nix/var/nix/profiles/per-user && \
+    chown -R 1000:1000 /nix/var/nix/gcroots/per-user && \
+    chmod 755 /nix/var/nix/profiles/per-user
 
 # Switch to non-root user
 USER devenv
